@@ -6,6 +6,7 @@ import {EpisodeType, setEpisodeTC} from "../../store/episodesReducer";
 import {episodesImages} from "../../store/episodesImages";
 import {CharacterType, getCharactersTC} from "../../store/charactersReducer";
 import Character from "../Characters/Character";
+import style from './Episodes.module.css'
 
 
 const EpisodePage = () => {
@@ -28,7 +29,7 @@ const EpisodePage = () => {
             </div>
             <div>name: {episode.name}</div>
             <div> air date: {episode.air_date}</div>
-            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr'}}>
+            <div className={style.episodesList}>
                 {characters.map(ch =><Character character={ch}/>)}
             </div>
         </div>
