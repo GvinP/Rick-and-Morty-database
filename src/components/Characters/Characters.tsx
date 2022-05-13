@@ -11,12 +11,10 @@ const Characters = () => {
     const characters = useSelector<AppStateType, CharactersPageType>((state) => state.charactersPage)
 
     useEffect(() => {
-        //@ts-ignore
         dispatch(setCharactersTC(1))
     }, [dispatch])
 
     const onPageHandler = (page: number) => {
-        //@ts-ignore
         dispatch(setCharactersTC(page))
     }
 

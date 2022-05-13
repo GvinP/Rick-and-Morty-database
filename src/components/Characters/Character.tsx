@@ -12,10 +12,10 @@ const Character = (props: CharacterPropsType) => {
         <div className={style.character}>
             <img src={props.character.image} style={{width: '170px'}}/>
             <div>{props.character.name}</div>
-            <div>{props.character.origin.name}</div>
-            <div>{props.character.type}</div>
-            <div>{props.character.gender}</div>
-            <div>{props.character.status}</div>
+            {/*<div>{props.character.origin.name}</div>*/}
+            {/*<div>{props.character.type}</div>*/}
+            {/*<div>{props.character.gender}</div>*/}
+            {/*<div>{props.character.status}</div>*/}
         </div>
     );
 };

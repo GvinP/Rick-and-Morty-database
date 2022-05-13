@@ -62,9 +62,9 @@ export const setCharactersTC = (page: number) => (dispatch: Dispatch) => {
 }
 export const getCharactersTC = (pages: number[]) => (dispatch: Dispatch) => {
     axios.get(`https://rickandmortyapi.com/api/character/${pages}`).then(response => {
-        debugger
         dispatch(getCharactersAC(response.data))
-    })
+    }).catch(err=>{
+        console.log(new Error(err))})
 }
 
 const InitialState: CharactersPageType = {

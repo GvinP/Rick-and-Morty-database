@@ -43,24 +43,14 @@ export const setEpisodeAC = (episode: EpisodeType) => {
     } as const
 }
 
-export const setEpisodesTC = () => (dispatch: Dispatch) => {
-    let episodes: Array<EpisodeType> = []
-    axios.get(`https://rickandmortyapi.com/api/episode/?page=1`).then(response => {
-        episodes = [...episodes, ...response.data.results]
-        dispatch(setEpisodesAC({...response.data.info, results: [...episodes]}))
-    })
-    axios.get(`https://rickandmortyapi.com/api/episode/?page=2`).then(response => {
-        episodes = [...episodes, ...response.data.results]
-        dispatch(setEpisodesAC({...response.data.info, results: [...episodes]}))
-    })
-    axios.get(`https://rickandmortyapi.com/api/episode/?page=3`).then(response => {
-        episodes = [...episodes, ...response.data.results]
-        dispatch(setEpisodesAC({...response.data.info, results: [...episodes]}))
+export const setEpisodesTC = (episodes: Array<number>) => (dispatch: Dispatch) => {
+    axios.get(`https://rickandmortyapi.com/api/episode/${episodes}`).then(response => {
+        dispatch(setEpisodesAC({...response.data.info, results: [...response.data]}))
     })
 }
 export const setEpisodeTC = (id: string) => (dispatch: Dispatch) => {
     axios.get(`https://rickandmortyapi.com/api/episode/${id}`).then(response => {
-                dispatch(setEpisodeAC(response.data))
+        dispatch(setEpisodeAC(response.data))
     })
 }
 
@@ -71,7 +61,15 @@ const InitialState: EpisodesPageType = {
         next: null,
         prev: null
     },
-    results: []
+    results: [{
+        id: 1,
+        name: '',
+        air_date: '',
+        episode: '',
+        characters: [],
+        url: '',
+        created: ''
+    }]
 }
 
 export const episodesReducer = (state = InitialState, action: allActionsType): EpisodesPageType => {
