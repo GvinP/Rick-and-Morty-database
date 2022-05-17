@@ -6,6 +6,7 @@ import Episodes from "./components/Episodes/Episodes";
 import Characters from "./components/Characters/Characters";
 import EpisodePage from "./components/Episodes/EpisodePage";
 import {Navigation} from "./components/Navigation/Navigation";
+import Locations from "./components/Locations/Locations";
 
 
 function App() {
@@ -15,26 +16,26 @@ function App() {
                 <Header/>
                 <Routes>
                     <Route path="/*" element={
-                        <div>
+                        <>
                             <Navigation/>
                             <Episodes/>
-                        </div>
+                        </>
                         }/>
                     <Route path="/episodes" element={
-                        <div>
+                        <>
                             <Navigation/>
                             <Outlet/>
-                        </div>
+                        </>
                     }>
                         <Route path="*" element={<div>Page not found</div>}/>
-                        <Route path="" element={<div><Episodes/></div>}/>
+                        <Route path="" element={<Episodes/>}/>
                         <Route path="season" element={<Outlet/>}>
                             <Route path=':id' element={<Episodes/>}/>
                             <Route path=':id/:epId' element={<EpisodePage/>}/>
                         </Route>
-                        {/*<Route path=':id' element={<EpisodePage/>}/>*/}
                     </Route>
                     <Route path="/characters" element={<Characters/>}/>
+                    <Route path="/locations" element={<Locations/>}/>
                 </Routes>
             </HashRouter>
         </div>

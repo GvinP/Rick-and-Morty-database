@@ -1,0 +1,15 @@
+.locationsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 60px;
+    margin: 20px;
+    border: 1px solid;
+}
