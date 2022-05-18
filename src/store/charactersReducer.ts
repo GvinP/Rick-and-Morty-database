@@ -61,9 +61,17 @@ export const setCharactersTC = (page: number) => (dispatch: Dispatch) => {
     })
 }
 export const getCharactersTC = (pages: number[]) => (dispatch: Dispatch) => {
+
     axios.get(`https://rickandmortyapi.com/api/character/${pages}`).then(response => {
-        dispatch(getCharactersAC(response.data))
+debugger
+        if (Array.isArray(response.data)) {
+            dispatch(getCharactersAC(response.data))
+        } else {
+            dispatch(getCharactersAC([response.data]))
+        }
+
     }).catch(err=>{
+
         console.log(new Error(err))})
 }
 
@@ -78,6 +86,7 @@ const InitialState: CharactersPageType = {
 }
 
 export const charactersReducer = (state = InitialState, action: allActionsType): CharactersPageType => {
+
     switch (action.type) {
         case SET_CHARACTERS:
             return {...state, info: action.info, results: [...action.results]}

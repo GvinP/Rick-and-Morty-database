@@ -7,6 +7,7 @@ import Characters from "./components/Characters/Characters";
 import EpisodePage from "./components/Episodes/EpisodePage";
 import {Navigation} from "./components/Navigation/Navigation";
 import Locations from "./components/Locations/Locations";
+import LocationPage from "./components/Locations/LocationPage";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                     </Route>
                     <Route path="/characters" element={<Characters/>}/>
                     <Route path="/locations" element={<Locations/>}/>
+                    <Route path="/locations/:id" element={<LocationPage/>}/>
                 </Routes>
             </HashRouter>
         </div>

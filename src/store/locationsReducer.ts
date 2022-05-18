@@ -1,7 +1,9 @@
 import axios from "axios";
 import {Dispatch} from "redux";
+import {EpisodeType, setEpisodeAC} from "./episodesReducer";
 
 const SET_LOCATIONS = 'SET_LOCATIONS'
+const SET_LOCATION = 'SET_LOCATION'
 const GET_LOCATIONS = 'GET_LOCATIONS'
 
 export type LocationType = {
@@ -19,10 +21,11 @@ export type LocationsPageType = {
     locations: Array<LocationType>
 }
 
-type allActionsType = setCharactersType | getCharactersType
+type allActionsType = setLocationsType | setLocationType | getLocationsType
 
-type setCharactersType = ReturnType<typeof setLocationsAC>
-type getCharactersType = ReturnType<typeof getLocationsAC>
+type setLocationsType = ReturnType<typeof setLocationsAC>
+type setLocationType = ReturnType<typeof setLocationAC>
+type getLocationsType = ReturnType<typeof getLocationsAC>
 
 
 export const setLocationsAC = (pagesCount: number, locations: Array<LocationType>) => {
@@ -39,9 +42,24 @@ export const getLocationsAC = (locations: Array<LocationType>) => {
     } as const
 }
 
+export const setLocationAC = (location: LocationType) => {
+    return {
+        type: SET_LOCATION,
+        location
+    } as const
+}
+
+
 export const setLocationsTC = (page: number) => (dispatch: Dispatch) => {
     axios.get(`https://rickandmortyapi.com/api/location/?page=${page}`).then(response => {
         dispatch(setLocationsAC(response.data.info.count, response.data.results))
+    })
+}
+export const setLocationTC = (id: string) => (dispatch: Dispatch) => {
+
+    axios.get(`https://rickandmortyapi.com/api/location/${id}`).then(response => {
+
+        dispatch(setLocationAC(response.data))
     })
 }
 // export const getLocationsTC = (pages: number[]) => (dispatch: Dispatch) => {
@@ -53,13 +71,26 @@ export const setLocationsTC = (page: number) => (dispatch: Dispatch) => {
 
 const InitialState: LocationsPageType = {
     pagesCount: 1,
-    locations: []
+    locations: [
+        {
+            id: 1,
+            name: '',
+            type: '',
+            dimension: '',
+            residents: [],
+            url: '',
+            created: '',
+        }
+    ]
 }
 
 export const locationsReducer = (state = InitialState, action: allActionsType): LocationsPageType => {
+
     switch (action.type) {
         case SET_LOCATIONS:
             return {...state, pagesCount: action.pagesCount, locations: [...action.locations]}
+        case SET_LOCATION:
+            return {...state, locations: [action.location]}
         case GET_LOCATIONS:
             return state
         default:

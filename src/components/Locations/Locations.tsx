@@ -4,7 +4,7 @@ import {AppStateType, TypedDispatch} from "../../store/store";
 import Pagination from "rc-pagination";
 import style from "./Locations.module.css";
 import {LocationsPageType, setLocationsTC} from "../../store/locationsReducer";
-import LocationPage from "./LocationPage";
+import {NavLink} from "react-router-dom";
 
 const Locations = () => {
     const dispatch = useDispatch<TypedDispatch>()
@@ -27,7 +27,7 @@ const Locations = () => {
                         defaultPageSize={20}
             />
             <div className={style.locationsList}>
-                {locations.locations.map(lc => <LocationPage location={lc}/>)}
+                {locations.locations.map(lc => <NavLink to={`/locations/${lc.id}`}><div className={style.location}>{lc.name}</div></NavLink>)}
             </div>
         </div>
     );
