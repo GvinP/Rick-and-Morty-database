@@ -52,7 +52,7 @@ export const setLocationAC = (location: LocationType) => {
 
 export const setLocationsTC = (page: number) => (dispatch: Dispatch) => {
     axios.get(`https://rickandmortyapi.com/api/location/?page=${page}`).then(response => {
-        dispatch(setLocationsAC(response.data.info.count, response.data.results))
+        dispatch(setLocationsAC(response.data.info.pages, response.data.results))
     })
 }
 export const setLocationTC = (id: string) => (dispatch: Dispatch) => {

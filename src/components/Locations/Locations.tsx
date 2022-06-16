@@ -5,6 +5,8 @@ import Pagination from "rc-pagination";
 import style from "./Locations.module.css";
 import {LocationsPageType, setLocationsTC} from "../../store/locationsReducer";
 import {NavLink} from "react-router-dom";
+import linkStyle from "../../common/common.module.css";
+import ReactPaginate from "react-paginate";
 
 const Locations = () => {
     const dispatch = useDispatch<TypedDispatch>()
@@ -15,19 +17,28 @@ const Locations = () => {
     }, [dispatch])
 
     const onPageHandler = (page: number) => {
-        dispatch(setLocationsTC(page))
+        dispatch(setLocationsTC(page+1))
     }
     return (
         <div>
-            <Pagination className="ant-pagination"
-                        showTitle={false}
-                        defaultCurrent={1}
-                        total={locations.pagesCount ? locations.pagesCount : 10}
-                        onChange={(e) => onPageHandler(e)}
-                        defaultPageSize={20}
+            <ReactPaginate
+                breakLabel="..."
+                breakClassName={linkStyle.link}
+                containerClassName={linkStyle.linksContainer}
+                pageClassName={linkStyle.link}
+                activeLinkClassName={linkStyle.active}
+                pageLinkClassName={linkStyle.link}
+                previousClassName={linkStyle.link}
+                nextClassName={linkStyle.link}
+                nextLabel=">"
+                onPageChange={(e)=>onPageHandler(e.selected)}
+                pageRangeDisplayed={3}
+                pageCount={locations.pagesCount}
+                previousLabel="<"
+                activeClassName={linkStyle.active}
             />
             <div className={style.locationsList}>
-                {locations.locations.map(lc => <NavLink to={`/locations/${lc.id}`}><div className={style.location}>{lc.name}</div></NavLink>)}
+                {locations.locations.map(lc => <NavLink to={`/locations/${lc.id}`} key={lc.id}><div className={style.location}>{lc.name}</div></NavLink>)}
             </div>
         </div>
     );

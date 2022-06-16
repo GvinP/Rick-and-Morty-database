@@ -20,24 +20,20 @@ const Episodes = () => {
         }
         dispatch(setEpisodesTC(series))
     }, [episodeId['id']])
-    console.log(episodeId)
-    console.log(episodeURL)
     return (
-        <div>
-            <div className={style.episodesList}>
-                {episodes.results.map(ep =>
-                    <div key={ep.id + ep.name}>
-                        <div>
-                            <NavLink
-                                to={episodeURL.pathname === '/' ? `episodes/season/1/${ep.id}` : episodeURL.pathname === '/episodes' ? `season/1/${ep.id}` : `${ep.id}`
-                                }>
-                                <img src={episodesImages[ep.episode]} alt={ep.name}/>
-                            </NavLink>
-                        </div>
-                        <div>{ep.name}</div>
+        <div className={style.episodesList}>
+            {episodes.results.map(ep =>
+                <div key={ep.id + ep.name}>
+                    <div>
+                        <NavLink
+                            to={episodeURL.pathname === '/' ? `episodes/season/1/${ep.id}` : episodeURL.pathname === '/episodes' ? `season/1/${ep.id}` : `${ep.id}`
+                            }>
+                            <img src={episodesImages[ep.episode]} alt={ep.name}/>
+                        </NavLink>
                     </div>
-                )}
-            </div>
+                    <div style={{fontWeight: 'bold'}}>{ep.name}</div>
+                </div>
+            )}
         </div>
     );
 };

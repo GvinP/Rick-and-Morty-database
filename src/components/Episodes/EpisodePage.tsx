@@ -21,7 +21,6 @@ const EpisodePage = () => {
     }, [episodeId, dispatch])
     useEffect(() => {
         dispatch(getCharactersTC(episode.characters.map(ch => +ch.substr(42))))
-        console.log(episode.characters.map(ch => +ch.substr(42)))
     }, [episode, dispatch])
     return (
         <div>
@@ -31,7 +30,7 @@ const EpisodePage = () => {
             <div>name: {episode.name}</div>
             <div> air date: {episode.air_date}</div>
             <div className={style.episodesList}>
-                {characters.map(ch => <Character key={ch.id+ch.name} character={ch}/>)}
+                {characters.map(ch => <Character key={ch.id + ch.name} character={ch}/>)}
             </div>
         </div>
     );

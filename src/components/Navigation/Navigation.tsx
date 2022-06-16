@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {NavLink, useLocation} from "react-router-dom";
+import style from '../../common/common.module.css'
 
 export const Navigation = () => {
     let location = useLocation()
@@ -15,20 +16,23 @@ export const Navigation = () => {
     }
     return (
         <>
-            <div>
-                {seasons.map(s => <span key={s+series[s]} onClick={() => setClickSeasonButton(s)}
-                                        style={{marginRight: '20px'}}>{
-                    <NavLink to={location.pathname==='/'?`episodes/season/${s}`:`season/${s}`}>
-                        <span style={{marginRight: '20px'}}>{s}</span>
+            <div className={style.linksContainer}>
+                {seasons.map(s => <span key={s + series[s]} onClick={() => setClickSeasonButton(s)}>{
+                    <NavLink className={({isActive}) => isActive ? `${style.link} ${style.active}` : style.link}
+                             style={{padding: '10px 20px'}}
+                             to={location.pathname === '/' ? `episodes/season/${s}` : `season/${s}`}>
+                        <div>{s}</div>
                     </NavLink>
                 }</span>)}
             </div>
-            <div>
+            <div className={style.linksContainer}>
                 {series.map(el =>
-                    <NavLink key={el+series[el]+series[el]} to={location.pathname==='/'?
+                    <NavLink className={({isActive}) => isActive ? `${style.link} ${style.active}` : style.link}
+                             style={{padding: '10px 20px'}}
+                             key={el + series[el] + series[el]} to={location.pathname === '/' ?
                         `episodes/season/${season}/${season === 1 ? el : (11 + (season - 2) * 10 + el)}`
-                        :`season/${season}/${season === 1 ? el : (11 + (season - 2) * 10 + el)}`}>
-                        <span style={{marginRight: '20px'}}>{el}</span>
+                        : `season/${season}/${season === 1 ? el : (11 + (season - 2) * 10 + el)}`}>
+                        <div>{el}</div>
                     </NavLink>
                 )}
             </div>
