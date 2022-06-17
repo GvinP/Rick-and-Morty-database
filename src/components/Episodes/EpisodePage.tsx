@@ -7,6 +7,7 @@ import {episodesImages} from "../../store/episodesImages";
 import {CharacterType, getCharactersTC} from "../../store/charactersReducer";
 import Character from "../Characters/Character";
 import style from './Episodes.module.css'
+import commonStyles from '../../common/common.module.css'
 
 
 const EpisodePage = () => {
@@ -24,12 +25,13 @@ const EpisodePage = () => {
     }, [episode, dispatch])
     return (
         <div>
-            <div>
-                <img src={episodesImages[episode.episode]} alt={episode.name}/>
+            <div className={style.episode}>
+                <img src={episodesImages[episode.episode]} alt={episode.name} className={style.image}/>
+                <div className={style.episodeName}>{episode.name}</div>
+                <div className={style.episodeName}>{episode.air_date}</div>
             </div>
-            <div>name: {episode.name}</div>
-            <div> air date: {episode.air_date}</div>
-            <div className={style.episodesList}>
+
+            <div className={commonStyles.list}>
                 {characters.map(ch => <Character key={ch.id + ch.name} character={ch}/>)}
             </div>
         </div>

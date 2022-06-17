@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType, TypedDispatch} from "../../store/store";
-import Pagination from "rc-pagination";
 import style from "./Locations.module.css";
 import {LocationsPageType, setLocationsTC} from "../../store/locationsReducer";
 import {NavLink} from "react-router-dom";
-import linkStyle from "../../common/common.module.css";
+import commonStyles from '../../common/common.module.css'
 import ReactPaginate from "react-paginate";
 
 const Locations = () => {
@@ -17,28 +16,33 @@ const Locations = () => {
     }, [dispatch])
 
     const onPageHandler = (page: number) => {
-        dispatch(setLocationsTC(page+1))
+        dispatch(setLocationsTC(page + 1))
     }
     return (
         <div>
-            <ReactPaginate
-                breakLabel="..."
-                breakClassName={linkStyle.link}
-                containerClassName={linkStyle.linksContainer}
-                pageClassName={linkStyle.link}
-                activeLinkClassName={linkStyle.active}
-                pageLinkClassName={linkStyle.link}
-                previousClassName={linkStyle.link}
-                nextClassName={linkStyle.link}
-                nextLabel=">"
-                onPageChange={(e)=>onPageHandler(e.selected)}
-                pageRangeDisplayed={3}
-                pageCount={locations.pagesCount}
-                previousLabel="<"
-                activeClassName={linkStyle.active}
-            />
-            <div className={style.locationsList}>
-                {locations.locations.map(lc => <NavLink to={`/locations/${lc.id}`} key={lc.id}><div className={style.location}>{lc.name}</div></NavLink>)}
+            <div className={commonStyles.pagination}>
+                <ReactPaginate
+                    breakLabel="..."
+                    breakClassName={commonStyles.link}
+                    containerClassName={commonStyles.linksContainer}
+                    pageClassName={commonStyles.link}
+                    activeLinkClassName={commonStyles.active}
+                    pageLinkClassName={commonStyles.link}
+                    previousClassName={commonStyles.link}
+                    nextClassName={commonStyles.link}
+                    nextLabel=">"
+                    onPageChange={(e) => onPageHandler(e.selected)}
+                    pageRangeDisplayed={3}
+                    pageCount={locations.pagesCount}
+                    previousLabel="<"
+                    activeClassName={commonStyles.active}
+                />
+            </div>
+            <div className={commonStyles.list}>
+                {locations.locations.map(lc => <NavLink to={`/locations/${lc.id}`} key={lc.id}
+                                                        className={`${commonStyles.link} ${style.location}`}>
+                    <div>{lc.name}</div>
+                </NavLink>)}
             </div>
         </div>
     );

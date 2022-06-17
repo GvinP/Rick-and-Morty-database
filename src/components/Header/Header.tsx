@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import rm from '../../images/RM.jpg'
-import style from '../../common/common.module.css'
+import style from './Header.module.css'
 
 const Header = () => {
     return (
@@ -9,19 +9,18 @@ const Header = () => {
             <div className={style.linksContainer}>
                 <NavLink to={'/episodes'}
                          className={({ isActive }) => isActive ? `${style.link} ${style.active}` : style.link}
-                         style={{fontSize: '24px', textTransform: 'uppercase', marginRight: '30px'}}
+                         style={{marginRight: '1em'}}
                 >episodes</NavLink>
                 <NavLink to={'/characters'}
                          className={({ isActive }) => isActive ? `${style.link} ${style.active}` : style.link}
-                         style={{fontSize: '24px', textTransform: 'uppercase', marginRight: '30px'}}
+                         style={{marginRight: '1em'}}
                 >characters</NavLink>
                 <NavLink to={'/locations'}
                          className={({ isActive }) => isActive ? `${style.link} ${style.active}` : style.link}
-                         style={{fontSize: '24px', textTransform: 'uppercase'}}
                 >locations</NavLink>
             </div>
             <div>
-                <img src={rm} width={500}/>
+                <img src={rm} className={style.image}/>
             </div>
 
         </nav>

@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
-import {LocationType, setLocationTC} from "../../store/locationsReducer";
+import {LocationType, setLocationsTC, setLocationTC} from "../../store/locationsReducer";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType, TypedDispatch} from "../../store/store";
 import {CharacterType, getCharactersTC} from "../../store/charactersReducer";
 import Character from "../Characters/Character";
 import style from './Locations.module.css'
+import commonStyles from '../../common/common.module.css'
+import ReactPaginate from "react-paginate";
 
 
 const LocationPage = () => {
@@ -19,20 +21,37 @@ const LocationPage = () => {
             dispatch(setLocationTC(locationId.id))
     }, [dispatch, locationId])
     useEffect(() => {
-
         dispatch(getCharactersTC(location.residents.map(ch => +ch.substr(42))))
         console.log(location.residents.map(ch => +ch.substr(42)))
         console.log(location)
     }, [location, dispatch])
 
+    const onPageHandler = (page: number) => {
+        dispatch(setLocationTC((page + 1).toString()))
+    }
+
     return (
         <div>
-            <div>{location.name}</div>
-            {/*<div>{location.dimension}</div>*/}
-            {/*<div>{location.type}</div>*/}
-            {/*<div>{location.created}</div>*/}
-            {/*<div>{location.id}</div>*/}
-            <div className={style.locationsList}>
+            <div className={commonStyles.pagination}>
+                <ReactPaginate
+                    breakLabel="..."
+                    breakClassName={commonStyles.link}
+                    containerClassName={commonStyles.linksContainer}
+                    pageClassName={commonStyles.link}
+                    activeLinkClassName={commonStyles.active}
+                    pageLinkClassName={commonStyles.link}
+                    previousClassName={commonStyles.link}
+                    nextClassName={commonStyles.link}
+                    nextLabel=">"
+                    onPageChange={(e) => onPageHandler(e.selected)}
+                    pageRangeDisplayed={3}
+                    pageCount={126}
+                    previousLabel="<"
+                    activeClassName={commonStyles.active}
+                />
+            </div>
+            <h2 className={style.locationName}>{location.name}</h2>
+            <div className={commonStyles.list}>
                 {characters.map(ch => <Character key={ch.id + ch.name + ch.name} character={ch}/>)}
             </div>
 

@@ -1,11 +1,5 @@
-.charactersList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
 .character {
-    width: 390px;
+    width: 400px;
     height: 150px;
     display: flex;
     overflow: hidden;
@@ -21,14 +15,13 @@
 }
 
 .imageBox {
-    flex: 2 1 0%;
+    flex: 2 1 0;
     width: 100%;
 }
 
 .image {
     width: 100%;
     height: 100%;
-    margin: 0px;
     opacity: 1;
     transition: opacity 0.5s ease 0s;
     object-position: center center;
@@ -36,7 +29,7 @@
 }
 
 .characterInfo {
-    flex: 3 1 0%;
+    flex: 3 1 0;
     position: relative;
     padding: 0.5rem;
     color: #000000;

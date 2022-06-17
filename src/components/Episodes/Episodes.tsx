@@ -5,6 +5,7 @@ import {AppStateType, TypedDispatch} from "../../store/store";
 import {NavLink, useLocation, useParams} from "react-router-dom";
 import style from './Episodes.module.css'
 import {episodesImages} from "../../store/episodesImages";
+import commonStyles from '../../common/common.module.css'
 
 const Episodes = () => {
     const episodeId = useParams<'id'>()
@@ -21,17 +22,17 @@ const Episodes = () => {
         dispatch(setEpisodesTC(series))
     }, [episodeId['id']])
     return (
-        <div className={style.episodesList}>
+        <div className={commonStyles.list}>
             {episodes.results.map(ep =>
-                <div key={ep.id + ep.name}>
+                <div key={ep.id + ep.name} className={style.episode}>
                     <div>
                         <NavLink
                             to={episodeURL.pathname === '/' ? `episodes/season/1/${ep.id}` : episodeURL.pathname === '/episodes' ? `season/1/${ep.id}` : `${ep.id}`
                             }>
-                            <img src={episodesImages[ep.episode]} alt={ep.name}/>
+                            <img src={episodesImages[ep.episode]} alt={ep.name} className={style.image}/>
                         </NavLink>
                     </div>
-                    <div style={{fontWeight: 'bold'}}>{ep.name}</div>
+                    <div className={style.episodeName}>{ep.name}</div>
                 </div>
             )}
         </div>

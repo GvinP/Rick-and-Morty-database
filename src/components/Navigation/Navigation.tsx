@@ -19,7 +19,7 @@ export const Navigation = () => {
             <div className={style.linksContainer}>
                 {seasons.map(s => <span key={s + series[s]} onClick={() => setClickSeasonButton(s)}>{
                     <NavLink className={({isActive}) => isActive ? `${style.link} ${style.active}` : style.link}
-                             style={{padding: '10px 20px'}}
+                             style={{padding: '0.5em 1em'}}
                              to={location.pathname === '/' ? `episodes/season/${s}` : `season/${s}`}>
                         <div>{s}</div>
                     </NavLink>
@@ -28,7 +28,7 @@ export const Navigation = () => {
             <div className={style.linksContainer}>
                 {series.map(el =>
                     <NavLink className={({isActive}) => isActive ? `${style.link} ${style.active}` : style.link}
-                             style={{padding: '10px 20px'}}
+                             style={{padding: '0.5em 1em'}}
                              key={el + series[el] + series[el]} to={location.pathname === '/' ?
                         `episodes/season/${season}/${season === 1 ? el : (11 + (season - 2) * 10 + el)}`
                         : `season/${season}/${season === 1 ? el : (11 + (season - 2) * 10 + el)}`}>

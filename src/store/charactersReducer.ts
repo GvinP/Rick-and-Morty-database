@@ -64,8 +64,10 @@ export const getCharactersTC = (pages: number[]) => (dispatch: Dispatch) => {
     axios.get(`https://rickandmortyapi.com/api/character/${pages}`).then(response => {
         if (Array.isArray(response.data)) {
             dispatch(getCharactersAC(response.data))
-        } else {
+        } else if(response.data.results) {
             dispatch(getCharactersAC(response.data.results))
+        } else {
+            dispatch(getCharactersAC([response.data]))
         }
     }).catch(err=>{
 
