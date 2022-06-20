@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import rm from '../../images/RM.jpg'
+import rm from '../../images/RM.png'
 import style from './Header.module.css'
 
 const Header = () => {

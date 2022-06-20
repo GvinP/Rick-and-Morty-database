@@ -22,14 +22,11 @@ const LocationPage = () => {
     }, [dispatch, locationId])
     useEffect(() => {
         dispatch(getCharactersTC(location.residents.map(ch => +ch.substr(42))))
-        console.log(location.residents.map(ch => +ch.substr(42)))
-        console.log(location)
     }, [location, dispatch])
 
     const onPageHandler = (page: number) => {
         dispatch(setLocationTC((page + 1).toString()))
     }
-
     return (
         <div>
             <div className={commonStyles.pagination}>
@@ -48,6 +45,7 @@ const LocationPage = () => {
                     pageCount={126}
                     previousLabel="<"
                     activeClassName={commonStyles.active}
+                    forcePage={locationId.id?+locationId.id-1:1}
                 />
             </div>
             <h2 className={style.locationName}>{location.name}</h2>
