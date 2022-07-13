@@ -2,7 +2,7 @@
   "name": "rick",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://GvinP.github.io/Rick-and-Morty-database",
+  "homepage": "https://GvinP.github.io/rick-and-morty-database",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
